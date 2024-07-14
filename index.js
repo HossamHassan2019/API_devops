@@ -1,19 +1,20 @@
 const express = require('express');
-const app =express();
-app.use(express.json());
+const app = express();
 
-app.listen(3000 , ()=>{
-    console.log("server running on port 3000");
+// Use the port provided by the environment or default to 3000
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
 
-app.get("/msg" , (req,res , next)=>{
+app.get('/msg', (req, res) => {
     res.json({"message": "My first API"});
 });
 
+app.use(express.json());
 
-
-app.post("/msg" , (req,res,next)=>{
+app.post('/msg', (req, res) => {
     const message = req.body.message;
     res.json({"receivedMessage": message});
 });
-
